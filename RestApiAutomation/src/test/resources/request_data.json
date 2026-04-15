@@ -1,9 +1,9 @@
 {
-    "name": "Arka New Test",
+    "name": "Arka Neo test",
     "data": {
-        "year": 2019,
+        "year": 2026,
         "price": 1849.99,
-        "CPU model": "Intel Core i9",
-        "Hard disk size": "1 TB"
+        "CPU model": "Intel Core i3",
+        "Hard disk size": "500 GB"
     }
 }

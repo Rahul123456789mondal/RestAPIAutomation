@@ -98,6 +98,24 @@ mvn clean install
    - `/collections/{collectionName}/objects/{id}` - Get object from collection
    - `/collections/{collectionName}/objects` - Create new objects
 
+### End-to-End Test Implementation Details
+
+The `endtoendTest.java` file implements a complete end-to-end workflow:
+
+1. **`createPostRequest()` method**:
+   - Reads request data from `src/test/resources/request_data.json`
+   - Sends a POST request to `https://api.restful-api.dev/collections/{collectionName}/objects` 
+   - Captures the ID of the created object for subsequent validation
+   - Validates the response status code and name field
+
+2. **`validateProductByID()` method**:
+   - Makes a GET request to `https://api.restful-api.dev/collections/{collectionName}/objects/{id}` using the captured ID
+   - Validates that the response status code is 200 (OK)
+   - Validates that the returned ID matches the one captured from the POST request
+   - Validates that the name matches what was sent in the POST request
+
+This implementation demonstrates a complete CRUD cycle: Create (POST) and Read (GET) operations with proper validation between the steps.
+
 ## Development Guidelines
 
 ### Adding New Tests
