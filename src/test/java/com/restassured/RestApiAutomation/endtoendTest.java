@@ -11,13 +11,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 import com.restassured.RestApiAutomation.pojo.Product;
+import com.restassured.RestApiAutomation.pojo.ProductData;
+
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 
 public class endtoendTest {
 
-    String id = "";
+    String id = "ff8081819d82fab6019dca62496c4ee7";
     List<Product> fetchedProducts = null;
+    // Initialize UpdateProducts list to avoid NullPointerException
+    List<Product> UpdateProducts = new ArrayList<>();
 
     @BeforeClass
     public void setup() {
@@ -124,6 +128,7 @@ public class endtoendTest {
         // Store the response in a class variable for use by other methods
         System.out.println("Fetched all products. Response stored as POJO objects in List.");
         System.out.println("Total products fetched: " + fetchedProducts.size());
+
         // Display information about the first few products
         if (!fetchedProducts.isEmpty()) {
             System.out.println("First product: " + fetchedProducts.get(0).getName());
@@ -134,6 +139,15 @@ public class endtoendTest {
             }
         }
 
+        // Store The Product Data matching the captured ID
+        for (Product product : fetchedProducts) {
+            if (id.equals(product.getId())) {
+                UpdateProducts.add(product);
+                System.out.println("Found matching product: " + product.getName() + " with ID: " + product.getId());
+            }
+        }
+
+        System.out.println("Total matching products found and stored in UpdateProducts: " + UpdateProducts.size());
     }
 
     @Test
@@ -174,6 +188,35 @@ public class endtoendTest {
             System.out.println("Updated Product CPU Model: " + updatedProduct.getData().getCPU_model());
             System.out.println("Updated Product Hard Disk Size: " + updatedProduct.getData().getHard_disk_size());
         }
+    }
+
+    // In this Method we are sending the request body using POJO classes
+    @Test
+    public void updateProductWithPojoBody() {
+        // Update the product by ID using PUT request, sending the body as a List
+        // 1. Create the ProductData object (pass 'null' for the color)
+        ProductData updateData = new ProductData(2026, 2101, "Intel Core i5", "1024 MB", null);
+        // 2. Create the main Product object (pass 'null' for the id)
+        Product payload = new Product(null, "Update Request At 22:35 By Arka", updateData);
+
+        System.out.println("List " + payload);
+
+        given()
+                .header("x-api-key", "0133e888-359b-497d-a1e2-a4f8255956e0")
+                .pathParam("collectionName", "testproducts")
+                .pathParam("id", id)
+                .contentType(ContentType.JSON)
+                .body(payload)
+                .log().uri()
+                .log().headers()
+                .log().body()
+                .when()
+                .put("/collections/{collectionName}/objects/{id}")
+                .then()
+                .log().all()
+                .statusCode(200);
+
+        System.out.println("Sent PUT request using UpdateProducts list for ID: " + id);
     }
 
 }

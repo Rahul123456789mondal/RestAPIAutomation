@@ -152,7 +152,8 @@ The `endtoendTest.java` file implements a complete end-to-end workflow using POJ
 
 3. **`fetchAllProducts()` method**:
    - Makes a GET request to `https://api.restful-api.dev/collections/{collectionName}/objects` to fetch all products
-   - Stores the response as a List of Product POJOs (`fetchedProducts`) for use by other methods
+   - Stores the response as a List of Product POJOs (`fetchedProducts`)
+   - Filters `fetchedProducts` to find the specific item matching the captured ID and stores it in the `UpdateProducts` list
    - Validates that the response status code is 200 (OK)
    - Uses POJO classes to deserialize the response for type-safe access to product data
 
@@ -166,7 +167,13 @@ The `endtoendTest.java` file implements a complete end-to-end workflow using POJ
    - Uses POJO classes to deserialize the response for easy access to updated product data
    - Displays the updated product information including name, year, price, CPU model, and hard disk size
 
-This implementation demonstrates a complete CRUD cycle: Create (POST), Read (GET), Update (PUT) operations with proper validation between the steps and response storage using POJO classes for further processing.
+5. **`updateProductWithPojoBody()` method**:
+   - Demonstrates updating a product by sending a body constructed using POJO classes instead of a JSON file
+   - Creates `ProductData` and `Product` objects programmatically
+   - Sends a PUT request with the POJO object as the request body
+   - Validates the response status code is 200 (OK)
+
+This implementation demonstrates a complete CRUD cycle: Create (POST), Read (GET), and multiple Update (PUT) strategies (JSON file and POJO objects) with proper validation and filtering of fetched products.
 
 ## Development Guidelines
 
