@@ -47,6 +47,7 @@ The framework demonstrates various API testing techniques including:
 - **REST Assured 5.4.0**: REST API testing library
 - **TestNG 7.9.0**: Testing framework
 - **Hamcrest 3.0**: Matcher objects for assertions
+- **Jackson**: JSON serialization/deserialization library
 - **Maven 3.0.0-M5**: Build automation tool
 - **VS Code**: Development environment
 
@@ -56,18 +57,26 @@ The framework demonstrates various API testing techniques including:
 RestApiAutomation/
 ├── src/
 │   ├── main/java/com/restassured/RestApiAutomation/
-│   │   └── GetRequestExample.java          # Basic GET request example
+│   │   ├── GetRequestExample.java          # Basic GET request example
+│   │   └── pojo/                          # POJO classes for JSON mapping
+│   │       ├── Product.java               # Product entity POJO
+│   │       ├── ProductData.java           # Product data nested POJO
+│   │       └── ProductList.java           # Product list container POJO
 │   └── test/
 │       ├── java/com/restassured/RestApiAutomation/
 │       │   ├── QueryParamsTest.java        # Query parameter testing
 │       │   ├── PathParamsTest.java         # Path parameter testing
 │       │   ├── ValidateResponseDemo.java   # Comprehensive response validation
 │       │   ├── YearResponseValidationTest.java # Specific field validation
-│       │   └── endtoendTest.java           # End-to-end API workflow
+│       │   ├── endtoendTest.java           # End-to-end API workflow
+│       │   └── POJOExampleTest.java        # Examples of using POJO classes for JSON mapping
 │       └── resources/
-│           └── request_data.json           # Sample JSON payload data
+│           ├── request_data.json           # Sample JSON payload data for POST requests
+│           ├── put_request.json            # Sample JSON payload data for PUT requests
+│           └── all_response.json           # Sample response data
 ├── pom.xml                                 # Maven configuration
-└── CLAUDE.md                              # Project guidance for Claude Code
+├── CLAUDE.md                               # Project guidance for Claude Code
+└── POJOCLASS.md                            # Detailed POJO implementation guide
 ```
 
 ## 🚀 Getting Started
@@ -118,6 +127,11 @@ mvn test -Dtest=QueryParamsTest#getJobsByLocation
 mvn test -Dsurefire.printSummary=true
 ```
 
+### Run tests using TestNG suite XML:
+```bash
+mvn test -DsuiteXmlFile=src/test/resources/testng.xml
+```
+
 ## 🧪 Test Examples
 
 ### Query Parameter Testing
@@ -130,7 +144,10 @@ Tests API endpoints with path parameters like `/jobs/{jobId}`
 Validates status codes, headers, response time, and body content
 
 ### End-to-End Workflows
-Complete API workflows including POST requests and data extraction
+Complete API workflows including Create (POST), Read (GET), and Update (PUT) operations with proper validation between steps and response storage using POJO classes.
+
+### POJO Integration
+Examples of using Plain Old Java Objects (POJOs) for JSON serialization and deserialization, detailed in `POJOCLASS.md`.
 
 ## 🤝 Contributing
 
