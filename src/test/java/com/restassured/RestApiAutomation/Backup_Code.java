@@ -2,18 +2,23 @@ package com.restassured.RestApiAutomation;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import com.restassured.RestApiAutomation.pojo.Product;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;
+import java.util.List;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 
-public class endtoendTest {
+public class Backup_Code {
 
     String id = "";
+    List<Product> fetchedProducts = null;
 
     @BeforeClass
     public void setup() {
@@ -78,29 +83,47 @@ public class endtoendTest {
                 // Validate that the name matches what we sent in the POST request
                 .body("name", equalTo("Arka Neo test")); // Updated to match the JSON file
     }
-}
 
-/*
- * 
- * // This is the another step to send the request body
- * 31 - // String jsonBody = "{\"name\":\"My MSI
- * 32 - //
- * Laptop\",\"data\":{\"year\":2024,\"price\":1299.99,\"CPU model\":\"Intel Core
- * 33 - // i5\",\"Hard disk size\":\"512GB\"}}";
- * 34 -
- * 35 - // 1. Create the inner nested JSON object ("data")
- * 36 - Map<String, Object> productData = new HashMap<>();
- * 37 - productData.put("year", 2019);
- * 38 - productData.put("price", 22234);
- * 39 - productData.put("CPU model", "Intel Core i9");
- * 40 - productData.put("Hard disk size", "1 TB");
- * 41 -
- * 42 - // 2. Create the main JSON object and attach the inner map
- * 43 - Map<String, Object> requestPayload = new HashMap<>();
- * 44 - requestPayload.put("name", "Arka New Test");
- * 45 - requestPayload.put("data", productData); // Nesting happens here
- * 46 -
- * 47 - // 3. Read the JSON file from the resources folder
- * 
- * 
- */
+    @Test
+    public void checkAllProduct() {
+
+        fetchedProducts = given()
+                // 1. Authentication Header
+                .header("x-api-key", "0133e888-359b-497d-a1e2-a4f8255956e0")
+
+                // 2. Path Parameter
+                .pathParam("collectionName", "testproducts")
+
+                // Logging (optional but good)
+                .log().uri()
+                .log().headers()
+
+                .when()
+                .get("/collections/{collectionName}/objects")
+
+                .then()
+                .log().all()
+                .statusCode(200)
+
+                // ✅ IMPORTANT CHANGE HERE
+                .extract()
+                .jsonPath()
+                .getList("", Product.class);
+
+        System.out.println("Total products fetched: " + fetchedProducts.size());
+
+        for (Product product : fetchedProducts) {
+            System.out.println("ID: " + product.getId());
+            System.out.println("Name: " + product.getName());
+
+            System.out.println("Year: " + product.getData().getYear());
+            System.out.println("Price: " + product.getData().getPrice());
+            System.out.println("CPU: " + product.getData().getCPU_model());
+            System.out.println("Disk: " + product.getData().getHard_disk_size());
+
+            System.out.println("----------------------------");
+        }
+
+    }
+
+}

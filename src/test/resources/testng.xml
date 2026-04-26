@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="RestApiAutomationSuite" parallel="false" verbose="2">
+
+    <!-- Test Suite for Query Parameter Testing -->
+    <test name="QueryParamTests">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.QueryParamsTest"/>
+        </classes>
+    </test>
+
+    <!-- Test Suite for Path Parameter Testing -->
+    <test name="PathParamTests">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.PathParamsTest"/>
+        </classes>
+    </test>
+
+    <!-- Test Suite for Response Validation -->
+    <test name="ResponseValidationTests">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.ValidateResponseDemo"/>
+        </classes>
+    </test>
+
+    <!-- Test Suite for Year Response Validation -->
+    <test name="YearResponseValidationTests">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.YearResponseValidationTest"/>
+        </classes>
+    </test>
+
+    <!-- Test Suite for End-to-End Product Creation and Validation -->
+    <test name="ProductCreationWorkflow">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.endtoendTest">
+                <methods>
+                    <include name="createPostRequest"/>
+                    <include name="validateProductByID"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Test Suite for Product Retrieval and Update Operations -->
+    <test name="ProductManagementWorkflow">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.endtoendTest">
+                <methods>
+                    <include name="fetchAllProducts"/>
+                    <include name="updateProductByID"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>

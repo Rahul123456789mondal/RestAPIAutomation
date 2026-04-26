@@ -1,0 +1,113 @@
+[
+    {
+        "id": "ff8081819d150699019d214dee9315c2",
+        "name": "Apple MacBook Pro 16 Test",
+        "data": {
+            "year": 2019,
+            "price": 1849.99,
+            "CPU model": "Intel Core i9",
+            "Hard disk size": "1 TB"
+        }
+    },
+    {
+        "id": "ff8081819d150699019d21500a2115c6",
+        "name": "Apple MacBook 17 Test",
+        "data": {
+            "year": 2020,
+            "price": 1934.99,
+            "CPU model": "Intel Core i5",
+            "Hard disk size": "2 TB"
+        }
+    },
+    {
+        "id": "ff8081819d150699019d2171187e161a",
+        "name": "My Custom Laptop",
+        "data": {
+            "year": 2024,
+            "price": 1299.99,
+            "CPU model": "Intel Core i7",
+            "Hard disk size": "512GB"
+        }
+    },
+    {
+        "id": "ff8081819d62221a019d7b9609e42174",
+        "name": "Arka New Laptop",
+        "data": {
+            "year": 2026,
+            "price": 1934.99,
+            "CPU model": "Intel Core i5",
+            "Hard disk size": "2 TB"
+        }
+    },
+    {
+        "id": "ff8081819d62221a019d7b9657122175",
+        "name": "Arka New Laptop",
+        "data": {
+            "year": 2026,
+            "price": 1934.99,
+            "CPU model": "Intel Core i5",
+            "Hard disk size": "2 TB"
+        }
+    },
+    {
+        "id": "ff8081819d62221a019d7b965fc92176",
+        "name": "Arka New Laptop",
+        "data": {
+            "year": 2026,
+            "price": 1934.99,
+            "CPU model": "Intel Core i5",
+            "Hard disk size": "2 TB"
+        }
+    },
+    {
+        "id": "ff8081819d62221a019d7bca152a219c",
+        "name": "My MSI Laptop",
+        "data": {
+            "year": 2024,
+            "price": 1299.99,
+            "CPU model": "Intel Core i5",
+            "Hard disk size": "512GB"
+        }
+    },
+    {
+        "id": "ff8081819d62221a019d7bd1882921a1",
+        "name": "Arka MacBook Neo Test",
+        "data": {
+            "year": 2019,
+            "price": 22234,
+            "CPU model": "Intel Core i9",
+            "Hard disk size": "1 TB"
+        }
+    },
+    {
+        "id": "ff8081819d62221a019d7bd207d321a2",
+        "name": "Arka MacBook Neo Test",
+        "data": {
+            "year": 2019,
+            "price": 22234,
+            "CPU model": "Intel Core i9",
+            "Hard disk size": "1 TB"
+        }
+    },
+    {
+        "id": "ff8081819d62221a019d7be27b1c21b1",
+        "name": "Apple MacBook Pro 16",
+        "data": {
+            "year": 2019,
+            "price": 2049.99,
+            "CPU model": "Intel Core i9",
+            "Hard disk size": "1 TB",
+            "color": "silver"
+        }
+    },
+    {
+        "id": "ff8081819d82fab6019d904b31cd0f9e",
+        "name": "Arka Neo test",
+        "data": {
+            "year": 2026,
+            "price": 1849.99,
+            "CPU model": "Intel Core i3",
+            "Hard disk size": "500 GB"
+        }
+    }
+]

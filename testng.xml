@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="RestApiAutomationSuite" parallel="false" verbose="2">
+
+    <!-- Test Suite for Product Creation and Validation -->
+    <test name="ProductCreationAndValidation">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.endtoendTest">
+                <methods>
+                    <include name="createPostRequest"/>
+                    <include name="validateProductByID"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <!-- Test Suite for Product Retrieval and Update -->
+    <test name="ProductRetrievalAndUpdate">
+        <classes>
+            <class name="com.restassured.RestApiAutomation.endtoendTest">
+                <methods>
+                    <include name="fetchAllProducts"/>
+                    <include name="updateProductByID"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+</suite>
