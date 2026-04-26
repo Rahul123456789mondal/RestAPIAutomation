@@ -175,6 +175,22 @@ The `endtoendTest.java` file implements a complete end-to-end workflow using POJ
 
 This implementation demonstrates a complete CRUD cycle: Create (POST), Read (GET), and multiple Update (PUT) strategies (JSON file and POJO objects) with proper validation and filtering of fetched products.
 
+### Backup Code & Learning Scenarios
+
+The `Backup_Code.java` file serves as a reference and learning playground for alternative extraction and processing strategies:
+
+1. **`fetchAllProductsToHashMap()` method**:
+   - Demonstrates fetching a list of products and mapping them into a Java `HashMap`
+   - Uses the product `id` as the **Key** and the entire `Product` POJO as the **Value**
+   - Useful for scenarios requiring quick, key-based lookups from large API responses
+   - Showcases iterating through `Map.Entry` to process key-value pairs
+
+2. **`updateRandomProductFromMap()` method**:
+   - Acts as a learning scenario for safely updating data stored in memory
+   - Randomly selects an existing product from the populated `productMap` using Java Streams
+   - Dynamically modifies the product's name and constructs a PUT request using POJO objects
+   - Executes the update and extracts the modified response back into a POJO
+
 ## Development Guidelines
 
 ### Adding New Tests

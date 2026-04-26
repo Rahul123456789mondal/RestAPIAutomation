@@ -176,6 +176,11 @@ Demonstrates a complete CRUD cycle using POJO classes:
 ### POJO Integration
 Detailed in `POJOCLASS.md`, POJOs are used for JSON serialization and deserialization. Tests like `POJOExampleTest` showcase how to structure and map complex nested JSON structures to Java objects.
 
+### Learning & Backup Scenarios (`Backup_Code.java`)
+The framework includes a `Backup_Code.java` file designed for educational purposes to demonstrate advanced data handling:
+- **`fetchAllProductsToHashMap()`**: Fetches all products and stores them in a `HashMap` (Key: ID, Value: Product POJO) for efficient lookup.
+- **`updateRandomProductFromMap()`**: Randomly selects an item from the map using Java Streams, dynamically modifies its payload, and performs a PUT request to update the specific record.
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.

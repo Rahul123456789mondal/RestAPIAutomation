@@ -4,12 +4,15 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.restassured.RestApiAutomation.pojo.Product;
+import com.restassured.RestApiAutomation.pojo.ProductData;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
@@ -19,6 +22,9 @@ public class Backup_Code {
 
     String id = "";
     List<Product> fetchedProducts = null;
+    // Store the product data in a HashMap where Key is the Product ID and Value is
+    // the Product Object
+    Map<String, Product> productMap = new HashMap<>();
 
     @BeforeClass
     public void setup() {
@@ -124,6 +130,78 @@ public class Backup_Code {
             System.out.println("----------------------------");
         }
 
+    }
+
+    @Test
+    public void fetchAllProductsToHashMap() {
+        // Fetch all products
+        List<Product> products = given()
+                // 1. Authentication Header
+                .header("x-api-key", "0133e888-359b-497d-a1e2-a4f8255956e0")
+                // 2. Path Parameter
+                .pathParam("collectionName", "testproducts")
+                .when()
+                .get("/collections/{collectionName}/objects")
+                .then()
+                .statusCode(200)
+                .extract()
+                .jsonPath()
+                .getList("", Product.class);
+
+        for (Product product : products) {
+            if (product.getId() != null) {
+                productMap.put(product.getId(), product);
+            }
+        }
+
+        System.out.println("Total products stored in HashMap: " + productMap.size());
+        // To print the total data using Key, Value wise
+        for (Map.Entry<String, Product> entry : productMap.entrySet()) {
+            System.out.println("Key (ID): " + entry.getKey() + " | Value (Name): " + entry.getValue().getName());
+        }
+    }
+
+    @Test
+    public void updateRandomProductFromMap() {
+        // Ensure productMap is populated before updating
+        if (productMap.isEmpty()) {
+            System.out.println("productMap is empty. Ensure fetchAllProductsToHashMap runs first.");
+            return;
+        }
+
+        // 1. Generate a random number between 0 and the size of the map
+        int randomIndex = new java.util.Random().nextInt(productMap.size());
+        String randomId = productMap.keySet().stream()
+                .skip(randomIndex)
+                .findFirst()
+                .orElse(null);
+
+        System.out.println("Selected Random ID for Update: " + randomId);
+
+        // Update the product by ID using PUT request, sending the body as a List
+        // 2. Create the ProductData object (pass 'null' for the color)
+        ProductData updateData = new ProductData(2026, 9995, "Intel Core i5", "2 TB", null);
+        // 3. Create the main Product object (pass 'null' for the id)
+        Product payload = new Product(null, "Update Request At 01:56 By Arka", updateData);
+
+        System.out.println("List " + payload);
+
+        given()
+                .header("x-api-key", "0133e888-359b-497d-a1e2-a4f8255956e0")
+                .pathParam("collectionName", "testproducts")
+                .pathParam("id", randomId)
+                .contentType(ContentType.JSON)
+                .body(payload)
+                .log().uri()
+                .log().headers()
+                .log().body()
+                .when()
+                .put("/collections/{collectionName}/objects/{id}")
+                .then()
+                .log().all()
+                .statusCode(200);
+
+        System.out.println("Sent PUT request using POJO body for Random ID: " + randomId);
     }
 
 }
